@@ -32,7 +32,6 @@ class _CategoricalPlotter(object):
     def establish_variables(self, x=None, y=None, hue=None, data=None,
                             orient=None, order=None, hue_order=None,
                             units=None):
-
         """Convert input specification into a common representation."""
         # Option 1:
         # We are plotting a wide-form dataset
