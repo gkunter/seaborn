@@ -32,6 +32,7 @@ class _CategoricalPlotter(object):
     def establish_variables(self, x=None, y=None, hue=None, data=None,
                             orient=None, order=None, hue_order=None,
                             units=None):
+
         """Convert input specification into a common representation."""
         # Option 1:
         # We are plotting a wide-form dataset
@@ -170,14 +171,24 @@ class _CategoricalPlotter(object):
                 else:
                     value_label = None
 
-                # This plot will not have group labels or hue nesting
+                # This plot will not have group labels
                 groups = None
                 group_label = None
                 group_names = []
-                plot_hues = None
-                hue_names = None
-                hue_title = None
                 plot_units = None
+
+                # Now handle the hue levels (if any)
+                if hue is None:
+                    plot_hues = None
+                    hue_title = None
+                    hue_names = None
+                else:
+                    # Get the order of the hue levels
+                    hue_names = categorical_order(hue, hue_order)
+
+                    # Assign a single hue group
+                    plot_hues = [np.array(hue)]
+                    hue_title = hue.name
 
             # Option 2b:
             # We are grouping the data values by another variable
